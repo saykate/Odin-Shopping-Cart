@@ -1,0 +1,24 @@
+.shopContainer {
+    padding: 2rem;
+    background-color: rgb(224, 224, 224);
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.itemGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    gap: 2rem;
+}
+
+@media (max-width: 425px){
+    .shopContainer {
+        padding: .5rem;
+    }
+    .itemGrid {
+        grid-template-columns: repeat(auto-fit, 325px);
+    }
+}

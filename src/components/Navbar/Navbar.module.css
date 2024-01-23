@@ -1,0 +1,19 @@
+.nav {
+    background-color: rgb(230, 250, 243);
+    padding: 2rem;
+    font-size: 2rem;
+}
+
+ul {
+    display: flex;
+    gap: 2rem;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+

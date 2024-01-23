@@ -1,0 +1,39 @@
+.homeContainer {
+    padding: 2rem;
+    background-color: rgb(224, 224, 224);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.homeCard {
+    margin-top: 2rem;
+    width: 80%;
+    height: 60%;
+    border: 3px solid;
+    background-image: url(/assets/tattoo.jpg);
+    background-size: cover;
+}
+
+.shopLink {
+    font-size: 3rem;
+    border: 2px solid;
+    padding: 1rem 2rem;
+    background-color: rgb(230, 250, 243);
+}
+
+@media (max-width: 768px) {
+    .homeCard {
+        background-size: contain;
+        height: 55%;
+    }
+}
+
+@media (max-width: 425px){
+    .homeCard {
+        background-size: contain;
+        height: 30%;
+    }
+}
