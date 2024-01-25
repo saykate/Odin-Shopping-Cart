@@ -5,8 +5,11 @@
 }
 
 ul {
+    position: relative;
+    padding: 0 2rem;
     display: flex;
     gap: 2rem;
+    justify-content: flex-start;
 }
 
 li {
@@ -15,5 +18,34 @@ li {
 
 a {
     text-decoration: none;
+}
+
+.cartLi {
+    position: absolute;
+    right: 2rem;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cart img {
+    flex: 0;
+    height: 30px;
+}
+
+@media (max-width: 425px) {
+    .nav {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+    ul {
+        gap: 1rem;
+    }
+    .cart {
+        gap: .5rem;
+    }
 }
 

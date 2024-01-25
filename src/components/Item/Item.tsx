@@ -1,14 +1,14 @@
-import tempItem from "../tempItem";
 import styles from './Item.module.css'
-import { useState, FC } from "react";
-import { CartItem } from "../../App";
+import { FC, useState } from "react";
+import { ProductType } from '../../App';
 
 export type ItemProps = {
-  addToCart: (item: CartItem, qty: number) => void;
+  product: ProductType;
+  addToCart: (product: ProductType, qty: number) => void;
 }
 
-const Item: FC<ItemProps> = ({ addToCart }) => {
-  const [qty, setQty] = useState(0)
+const Item: FC<ItemProps> = ({ product,  addToCart }) => {
+  const [qty, setQty] = useState(0);
 
   const handleQtyClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const targetButton = e.target as HTMLButtonElement;
@@ -20,22 +20,26 @@ const Item: FC<ItemProps> = ({ addToCart }) => {
   }
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const targetButton = e.target as HTMLButtonElement;
-    console.log(targetButton)
-    // addToCart(targetButton, qty)
+    addToCart(product, qty)
+    setQty(0);
   }
 
   return (
     <div className={styles.itemCard}>
-      <img src={tempItem.image} alt="whale" />
-      <h2 className="itemTitle">{tempItem.title}</h2>  
-      <p className="itemPrice">${tempItem.price}</p>
-      <div className={styles.buttonGroup}>
-        <button className="subProduct" onClick={handleQtyClick} disabled={qty === 0}>-</button>
-        <p className="itemCount">{qty}</p>
-        <button className="addProduct" onClick={handleQtyClick}>+</button> 
+      <div className={styles.imageContainer}>
+        <img src={product.image} alt={product.title} />
       </div>
-      {qty > 0 && <button className="addToCart" onClick={handleAddToCart}>Add To Cart</button>}
+      <h2>{product.title}</h2>  
+      <p>${product.price}</p>
+      <p>{product.description}</p>
+      <div className={styles.buttonGroup}>
+        <div className={styles.countGroup}>
+          <button className="subProduct" onClick={handleQtyClick} disabled={qty === 0}>-</button>
+          <p className="itemCount">{qty}</p>
+          <button className="addProduct" onClick={handleQtyClick}>+</button>
+        </div>
+        {qty > 0 && <button className="addToCart" onClick={handleAddToCart}>Add To Cart</button>}
+      </div>
     </div>
   );
 };

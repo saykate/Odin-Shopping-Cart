@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
+import { FC } from 'react'
 import styles from './Navbar.module.css'
 
-const Navbar = () => {
+export type NavTypes = {
+  cartQty: number;
+}
+
+const Navbar: FC<NavTypes> = ({ cartQty }) => {
     return (
       <nav className={styles.nav}>
         <ul>
@@ -11,8 +16,8 @@ const Navbar = () => {
           <li>
             <Link to="shop">Shop</Link>
           </li>
-          <li>
-            <Link to="cart">Cart</Link>
+          <li className={styles.cartLi}>
+          <Link  className={styles.cart} to="cart">Cart<img src='/assets/cart-outline.svg' />{cartQty}</Link>
           </li>
         </ul>
       </nav>
