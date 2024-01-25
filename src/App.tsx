@@ -1,5 +1,4 @@
 import Navbar from './components/Navbar/Navbar'
-import './App.css'
 import Cart from "./components/Cart/Cart.tsx";
 import Shop from "./components/Shop/Shop.tsx";
 import Home from "./components/Home/Home.tsx";
@@ -13,6 +12,7 @@ export type ProductType = {
   category: string;
   description: string; 
   image: string; 
+  qty: number;
 }
 
 function App() {
@@ -33,7 +33,8 @@ function App() {
           <Route element={<Home />} path='/'/>
           <Route element={<Shop 
             addToCart={addToCart} />} path='/shop'/>
-          <Route element={<Cart />} path='/cart'/>
+          <Route element={<Cart 
+            cartItems={cartItems} />} path='/cart'/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -20,9 +20,19 @@
 
 .buttonGroup {
     justify-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
 }
+
 .countGroup {
     display: flex;
     gap: 1rem;
+}
+ 
+.countGroup button {
+    width: 25px;
+    height: 25px;
 }
 
