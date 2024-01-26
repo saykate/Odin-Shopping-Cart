@@ -10,8 +10,8 @@
 }
 
 .imageContainer {
-    width: 250px;
-    height: 250px;
+    width: 15.5rem;
+    height: 15.5rem;
     overflow: hidden;
     display: flex;
     align-items: flex-start;
@@ -32,7 +32,11 @@
 }
  
 .countGroup button {
-    width: 25px;
-    height: 25px;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.countGroup input {
+    width: 2rem;
 }
 

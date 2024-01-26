@@ -19,15 +19,26 @@ export type ButtonType = 'increment' | 'decrement';
 
 function App() {
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
-  const [cartQty, setCartQty] = useState(0)
+  const [cartQty, setCartQty] = useState(0);
 
   const addToCart = (product: ProductType, qty: number) => {
-    const newItem = { ...product, qty };
-    setCartItems([...cartItems, newItem ]);
-    setCartQty(qty + cartQty);
+    const existingItem = cartItems.find((item) => item.id === product.id);
+  
+    if (existingItem) {
+      const newCartItems = cartItems.map((item) =>
+        item.id === existingItem.id ? { ...item, qty: item.qty + qty } : item
+      );
+      setCartItems(newCartItems);
+    } else {
+      const newItem = { ...product, qty, uniqueId: Date.now() };
+      setCartItems([...cartItems, newItem]);
+    }
+  
+    setCartQty(cartQty + qty);
   };
+  
 
-  const updateQty = (id: number, buttonType: ButtonType) => {
+  const updateCartQty = (id: number, buttonType: ButtonType) => {
     const newCartItems = cartItems.map(item => {
       if (item.id !== id) {
         return item
@@ -40,10 +51,20 @@ function App() {
     setCartItems(newCartItems)
  };
 
+ const handleCartQtyChange = (id: number, qty: number) => {
+  const newCartItems = cartItems.map((item) => 
+    item.id === id ? { ...item, qty } : item
+  )
+  setCartItems(newCartItems)
+
+  const newCartQty = newCartItems.reduce((totalQty, item) => totalQty + item.qty, 0);
+  setCartQty(newCartQty);
+}
+
   const deleteCartItem = (id: number) => {
-    const newCart = cartItems.filter((item) => item.id !== id)
-      setCartItems(newCart)
-    const newCartQty = newCart.reduce((totalQty, item) => totalQty + item.qty, 0)
+    const newCartItems = cartItems.filter((item) => item.id !== id)
+      setCartItems(newCartItems)
+    const newCartQty = newCartItems.reduce((totalQty, item) => totalQty + item.qty, 0)
       setCartQty(newCartQty)
     }
 
@@ -57,8 +78,9 @@ function App() {
             addToCart={addToCart} />} path='/shop'/>
           <Route element={<Cart 
             cartItems={cartItems}
-            updateQty={updateQty}
-            deleteCartItem={deleteCartItem} />} path='/cart'/>
+            updateCartQty={updateCartQty}
+            deleteCartItem={deleteCartItem}
+            handleCartQtyChange={handleCartQtyChange} />} path='/cart'/>
         </Routes>
       </BrowserRouter>
     </div>

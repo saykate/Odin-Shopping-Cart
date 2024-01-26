@@ -4,11 +4,12 @@ import { ButtonType, ProductType } from '../../App';
 
 export type CartProps = {
     cartItems: ProductType[];
-    updateQty: (id: number, buttonType: ButtonType) => void; 
+    updateCartQty: (id: number, buttonType: ButtonType) => void; 
     deleteCartItem: (id: number) => void;
+    handleCartQtyChange: (id: number, qty: number) => void;
   }
 
-const Cart: FC<CartProps> = ({ cartItems, updateQty, deleteCartItem }) => {
+const Cart: FC<CartProps> = ({ cartItems, updateCartQty, deleteCartItem, handleCartQtyChange }) => {
   console.log(cartItems) 
 
     const cartTotal = cartItems.reduce((total, item) => {
@@ -37,9 +38,9 @@ const Cart: FC<CartProps> = ({ cartItems, updateQty, deleteCartItem }) => {
                       <td>${item.price}</td>
                       <td className={styles.quant}>
                         <div className={styles.qtyButtonGroup}>
-                          <button onClick={() => updateQty(item.id, "decrement")} disabled={item.qty === 0}>-</button>
-                          <input type="number" value={item.qty}/>
-                          <button onClick={() => updateQty(item.id, "increment")}>+</button>
+                          <button onClick={() => updateCartQty(item.id, "decrement")} disabled={item.qty === 0}>-</button>
+                          <input type="number" value={item.qty} onChange={(e) => handleCartQtyChange(item.id, Number(e.target.value))}/>
+                          <button onClick={() => updateCartQty(item.id, "increment")}>+</button>
                         </div>
                       </td>
                       <td><button onClick={() => deleteCartItem(item.id)}>X</button></td>
