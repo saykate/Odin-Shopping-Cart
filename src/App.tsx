@@ -15,6 +15,8 @@ export type ProductType = {
   qty: number;
 }
 
+export type ButtonType = 'increment' | 'decrement'; 
+
 function App() {
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
   const [cartQty, setCartQty] = useState(0)
@@ -25,6 +27,26 @@ function App() {
     setCartQty(qty + cartQty);
   };
 
+  const updateQty = (id: number, buttonType: ButtonType) => {
+    const newCartItems = cartItems.map(item => {
+      if (item.id !== id) {
+        return item
+      } 
+      if (buttonType === 'increment') {
+        return {...item, qty: item.qty + 1}
+      }
+      return {...item, qty: item.qty - 1} 
+    }) 
+    setCartItems(newCartItems)
+ };
+
+  const deleteCartItem = (id: number) => {
+    const newCart = cartItems.filter((item) => item.id !== id)
+      setCartItems(newCart)
+    const newCartQty = newCart.reduce((totalQty, item) => totalQty + item.qty, 0)
+      setCartQty(newCartQty)
+    }
+
   return (
     <div className=''>
       <BrowserRouter >
@@ -34,7 +56,9 @@ function App() {
           <Route element={<Shop 
             addToCart={addToCart} />} path='/shop'/>
           <Route element={<Cart 
-            cartItems={cartItems} />} path='/cart'/>
+            cartItems={cartItems}
+            updateQty={updateQty}
+            deleteCartItem={deleteCartItem} />} path='/cart'/>
         </Routes>
       </BrowserRouter>
     </div>

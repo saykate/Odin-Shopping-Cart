@@ -1,17 +1,20 @@
 import styles from './Cart.module.css';
-import { FC, useState } from 'react'
-import { ProductType } from '../../App';
+import { FC } from 'react'
+import { ButtonType, ProductType } from '../../App';
 
 export type CartProps = {
     cartItems: ProductType[];
+    updateQty: (id: number, buttonType: ButtonType) => void; 
+    deleteCartItem: (id: number) => void;
   }
 
-const Cart: FC<CartProps> = ({ cartItems }) => {
+const Cart: FC<CartProps> = ({ cartItems, updateQty, deleteCartItem }) => {
+  console.log(cartItems) 
 
     const cartTotal = cartItems.reduce((total, item) => {
         const itemTotal = item.qty * item.price;
         return total + itemTotal
-    }, 0)
+    }, 0).toFixed(2)
 
     return (
         <div className={styles.cartContainer}>
@@ -32,8 +35,14 @@ const Cart: FC<CartProps> = ({ cartItems }) => {
                       <td className={styles.product}><img src={item.image} alt={item.title} /></td>
                       <td className={styles.title}>{item.title}</td>
                       <td>${item.price}</td>
-                      <td className={styles.quant}><div className={styles.qtyButtonGroup}><button>-</button>{item.qty}<button>+</button></div></td>
-                      <td><button>X</button></td>
+                      <td className={styles.quant}>
+                        <div className={styles.qtyButtonGroup}>
+                          <button onClick={() => updateQty(item.id, "decrement")} disabled={item.qty === 0}>-</button>
+                          <input type="number" value={item.qty}/>
+                          <button onClick={() => updateQty(item.id, "increment")}>+</button>
+                        </div>
+                      </td>
+                      <td><button onClick={() => deleteCartItem(item.id)}>X</button></td>
                     </tr>              
                   ))}
                 </tbody>
