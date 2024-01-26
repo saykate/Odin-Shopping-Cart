@@ -12,13 +12,13 @@ h1 {
 
 .itemGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 350px);
+    grid-template-columns: repeat(auto-fit, 22rem);
     gap: 2rem;
     justify-content: center;
 }
 
 @media (max-width: 425px){
     .itemGrid {
-        grid-template-columns: repeat(auto-fit, 325px);
+        grid-template-columns: repeat(auto-fit, 20rem);
     }
 }

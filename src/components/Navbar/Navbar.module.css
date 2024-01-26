@@ -34,7 +34,7 @@ a {
 
 .cart img {
     flex: 0;
-    height: 30px;
+    height: 2rem;
 }
 
 @media (max-width: 425px) {
