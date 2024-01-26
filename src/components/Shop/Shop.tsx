@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import Item from '../Item/Item'
-import { ButtonType, ProductType } from "../../App";
+import { ProductType } from "../../App";
 import styles from "./Shop.module.css"
 
 export type ShopProps = {
