@@ -5,7 +5,6 @@ import { ProductType, ButtonType } from '../../App';
 export type ItemProps = {
   product: ProductType;
   addToCart: (product: ProductType, qty: number) => void;
-  buttonType: ButtonType
 }
 
 const Item: FC<ItemProps> = ({ product,  addToCart }) => {

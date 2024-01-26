@@ -5,10 +5,9 @@ import styles from "./Shop.module.css"
 
 export type ShopProps = {
   addToCart: (product: ProductType, qty: number) => void;
-  buttonType: ButtonType
 }
 
-const Shop: FC<ShopProps> = ({ addToCart, buttonType }) => {
+const Shop: FC<ShopProps> = ({ addToCart }) => {
   const [products, setProduct] = useState<ProductType[]>([])
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,7 +42,7 @@ const Shop: FC<ShopProps> = ({ addToCart, buttonType }) => {
       <h1>This is the Shop</h1>
       <div className={styles.itemGrid}>
       {products.map((product) => (
-          <Item key={product.id} product={product} addToCart={addToCart} buttonType={buttonType}/>
+          <Item key={product.id} product={product} addToCart={addToCart} />
         ))}
       </div>
     </div>
